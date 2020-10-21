@@ -46,7 +46,7 @@ provider:
   stage: ${self:custom.parameters.stage}
   environment:
     STAGE: ${self:custom.parameters.stage}
-    VERSION: ${self:custom.parameters.version}
+    VERSION: ${ssm:/aws/reference/secretsmanager/serverless-python-fastapi/version}
     PROJECT_NAME: ${self:custom.parameters.project_name}
     PROJECT_DESCRIPTION: ${self:custom.parameters.project_description}
     DSN_SENTRY: ${self:custom.parameters.dsn_sentry}
