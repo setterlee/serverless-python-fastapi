@@ -49,11 +49,23 @@ Para mayor detalle de como configurar la sesión de aws revisar la siguiente doc
 
 Para hacer deploy en AWS con Serverless se debe ejecutar el siguiente comando:
 
+
+Instalar las librerias requeridas por sls
+```
+npm install
+```
+
 Activar el entorno local de python e instalar las librerias:
 
 ```
 virtualenv venv --python=python3     
 . venv/bin/activate     
+```
+
+Instalar las librerias requeridas por python:
+
+```
+pip install -r requirements.txt     
 ```
 
 Ejecucion de deploy:
@@ -86,11 +98,12 @@ Activar el entorno local de python e instalar las librerias:
 virtualenv venv --python=python3     
 . venv/bin/activate     
 ```
+Instalar las librerias requeridas por python:
 
-Instalacion de libreria uvicorn
 ```
-pip install uvicorn
+pip install -r requirements.txt     
 ```
+
 
 Ejeucion de la aplicacion:
 ```
