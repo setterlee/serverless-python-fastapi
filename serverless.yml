@@ -1,5 +1,3 @@
-org: setterlee
-app: serverless-python-fastapi
 service: serverless-python-fastapi
 
 plugins:
@@ -27,7 +25,6 @@ custom:
     allow_credentials: ${opt:allow_credentials, self:custom.defaults-parameters-values.allow_credentials}
     allow_methods: ${opt:allow_methods, self:custom.defaults-parameters-values.allow_methods}
     allow_headers: ${opt:allow_headers, self:custom.defaults-parameters-values.allow_headers}
-    url_todos: ${opt:url_todos, self:custom.defaults-parameters-values.url_todos}
   defaults-parameters-values:
     stage: "dev"
     version: "v1"
@@ -38,7 +35,6 @@ custom:
     allow_credentials: "true"
     allow_methods: "*"
     allow_headers: "*"
-    url_todos: "https://jsonplaceholder.typicode.com/todos/1"
 
 provider:
   name: aws
@@ -46,7 +42,7 @@ provider:
   stage: ${self:custom.parameters.stage}
   environment:
     STAGE: ${self:custom.parameters.stage}
-    VERSION: ${ssm:/aws/reference/secretsmanager/serverless-python-fastapi/version}
+    VERSION: ${self:custom.parameters.version}
     PROJECT_NAME: ${self:custom.parameters.project_name}
     PROJECT_DESCRIPTION: ${self:custom.parameters.project_description}
     DSN_SENTRY: ${self:custom.parameters.dsn_sentry}
@@ -54,7 +50,7 @@ provider:
     ALLOW_CREDENTIALS: ${self:custom.parameters.allow_credentials}
     ALLOW_METHODS: ${self:custom.parameters.allow_methods}
     ALLOW_HEADERS: ${self:custom.parameters.allow_headers}
-    URL_TODOS: ${self:custom.parameters.url_todos}
+   
     
 
 functions:
@@ -64,4 +60,6 @@ functions:
       - http:
           path: /{proxy+}
           method: ANY
+    environment:
+      URL_TODOS: ${ssm:/aws/reference/secretsmanager/dev/serverless-python-fastapi/url_todo~true}
   
